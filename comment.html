@@ -37,7 +37,7 @@
 
         .comment {
             display: grid;
-            grid-template-columns: 1fr 1fr 3fr;
+            grid-template-columns: 1.5fr 1fr 10fr;
             gap: 24px;
             align-items: start;
         }
@@ -223,9 +223,13 @@
 
         function displayComments(data) {
             const commentList = document.getElementById('comment-list');
-            commentList.innerHTML = ""; 
-
-            data.reverse().forEach(([timestamp, username, comment]) => {
+            commentList.innerHTML = "";
+        
+            // Sort the comments by timestamp in descending order (newest first)
+            data.sort((a, b) => b[0] - a[0]);
+        
+            // Display each comment
+            data.forEach(([timestamp, username, comment]) => {
                 const date = new Date(timestamp * 1000).toISOString().split('T')[0].replace(/-/g, '/');
                 const commentHTML = `
                     <div>${username}</div>
