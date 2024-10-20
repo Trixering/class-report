@@ -196,6 +196,8 @@
             const proxyURL = "https://cors-anywhere.herokuapp.com/";
             const requestURL = "https://js.al/uw5hgw8w35p2ogi";
             const commentList = document.getElementById('comment-list');
+            const replyDiv = document.querySelector('.reply');
+            replyDiv.style.display = 'none';
         
             try {
                 const request = new Request(proxyURL + requestURL, {
@@ -212,14 +214,20 @@
         
                 const data = await response.json();
                 displayComments(data);
+                replyDiv.style.display = 'block';
                 return data;
             } catch (error) {
                 console.error('Fetch error:', error);
                 commentList.innerHTML = `
-                    <p>請先至cors-anywhere開啟設置。<br><a href="https://cors-anywhere.herokuapp.com/" target="_blank">https://cors-anywhere.herokuapp.com/</a></p>
+                    <p style="width: 500px;">請先至cors-anywhere開啟設置。<br>
+                    <a href="https://cors-anywhere.herokuapp.com/" target="_blank">
+                        <u>https://cors-anywhere.herokuapp.com/</u>
+                    </a></p>
                 `;
+                replyDiv.style.display = 'none';
             }
         }
+        
 
         function displayComments(data) {
             const commentList = document.getElementById('comment-list');
