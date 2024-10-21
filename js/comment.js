@@ -47,7 +47,7 @@ async function reply(debug_ = false) {
         console.log(newComment)
         const updatedComments = [...existingComments, newComment];
 
-        if (debug_) {
+        if (debug_ == true) {
             alert("測試"); // 測試
             console.log(comment);
         } else {
@@ -77,7 +77,7 @@ async function getComments(debug_ = false) {
     try {
         let data;
 
-        if (debug_) {
+        if (debug_ == true) {
 
             const response = await fetch('comment.json');
 
