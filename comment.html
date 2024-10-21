@@ -8,47 +8,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>個人履歷網站</title>
-    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        .content {
-            padding: 60px 20px 20px;
-        }
-
-        .reply {
-            margin-bottom: 20px;
-        }
-
-        .reply input,
-        .reply textarea {
-            width: 100%;
-            margin-bottom: 10px;
-            padding: 8px;
-            box-sizing: border-box;
-        }
-
-        .reply button {
-            padding: 8px 16px;
-            background-color: #272834;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
-
-        .comment {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr 10fr;
-            gap: 24px;
-            align-items: start;
-        }
-
-        .comment div {
-            padding: 8px;
-            background-color: #333;
-            border-radius: 4px;
-            color: #fff;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/comment.css">
 </head>
 
 
@@ -126,9 +88,9 @@
         </div>
         <div class="content">
             <div class="reply">
-                <input type="text" id="username" placeholder="Your name" />
                 <textarea id="user-comment" rows="4" placeholder="Your comment"></textarea>
-                <button onclick="reply()">Submit</button>
+                <input type="text" id="user-name" placeholder="Your name" />
+                <button id="reply" ,onclick="reply()">Submit</button>
             </div>
             <div class="comment" id="comment-list">
                 <!-- 載入留言 -->
@@ -141,115 +103,19 @@
             Built by Trixering.&nbsp;&nbsp;All rights reserved.
         </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
     <script>
-        async function postData(url = '', data = {}) {
-            // 規避CORS錯誤
-            const proxyURL = "https://cors-anywhere.herokuapp.com/";
-            const response = await fetch(proxyURL + url, {
-                method: 'POST',
-                mode: 'cors',
-                cache: 'no-cache',
-                credentials: 'same-origin',
-                headers: {
-                    'Content-Type': 'application/json',
-                    "X-Requested-With": "XMLHttpRequest"
-                },
-                redirect: 'follow',
-                referrerPolicy: 'no-referrer',
-                body: JSON.stringify(data)
-            });
-            return response.json(); 
-        }
-
-        async function reply() {
-            const comment = document.getElementById('user-comment').value;
-            const name = document.getElementById('username').value;
-            const type = "text";
-            const short_code = "uw5hgw8w35p2ogi";
-
-            if (!comment || !name) {
-                alert("Please enter your name and comment.");
-                return;
-            }
-
-            try {
-                const existingComments = await getComments();
-                const newTimestamp = Math.floor(Date.now() / 1000);
-                const newComment = [newTimestamp, name, comment];
-                const updatedComments = [...existingComments, newComment];
-                postData("https://js.al/short_api", {
-                    "orgi_url": JSON.stringify(updatedComments),
-                    "short_code": short_code,
-                    "type": type
-                }).then(resp => {
-                    alert("發表成功！");
-                    window.location.href = "comment.html";
-                }).catch(error => {
-                    console.error("Error posting comment:", error);
-                });
-            } catch (error) {
-                console.error("Error fetching existing comments:", error);
-            }
-        }
-
-        async function getComments() {
-            const proxyURL = "https://cors-anywhere.herokuapp.com/";
-            const requestURL = "https://js.al/uw5hgw8w35p2ogi";
-            const commentList = document.getElementById('comment-list');
-            const replyDiv = document.querySelector('.reply');
-            replyDiv.style.display = 'none';
-        
-            try {
-                const request = new Request(proxyURL + requestURL, {
-                    headers: {
-                        "X-Requested-With": "XMLHttpRequest",
-                    },
-                });
-        
-                const response = await fetch(request);
-        
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-        
-                const data = await response.json();
-                displayComments(data);
-                replyDiv.style.display = 'block';
-                return data;
-            } catch (error) {
-                console.error('Fetch error:', error);
-                commentList.innerHTML = `
-                    <p style="width: 500px;">請先至cors-anywhere開啟設置。<br>
-                    <a href="https://cors-anywhere.herokuapp.com/" target="_blank">
-                        <u>https://cors-anywhere.herokuapp.com/</u>
-                    </a></p>
-                `;
-                replyDiv.style.display = 'none';
-            }
-        }
-        
-
-        function displayComments(data) {
-            const commentList = document.getElementById('comment-list');
-            commentList.innerHTML = "";
-        
-            // Sort the comments by timestamp in descending order (newest first)
-            data.sort((a, b) => b[0] - a[0]);
-        
-            // Display each comment
-            data.forEach(([timestamp, username, comment]) => {
-                const date = new Date(timestamp * 1000).toISOString().split('T')[0].replace(/-/g, '/');
-                const commentHTML = `
-                    <div>${username}</div>
-                    <div>${date}</div>
-                    <div>${comment}</div>
-                `;
-                commentList.innerHTML += commentHTML;
-            });
-        }
-
-        window.onload = getComments;
+        const easyMDE = new EasyMDE({
+            element: document.getElementById('user-comment'),
+            minHeight: "150px",
+            maxHeight: "150px",
+            sideBySideFullscreen: false,
+            toolbar: ['bold', 'italic', 'heading', '|', 'quote', 'unordered-list', 'ordered-list', '|', 'link', 'image', '|', 'preview']
+        });
     </script>
+    <script async src="js/comment.js"></script>
 </body>
 
 </html>
