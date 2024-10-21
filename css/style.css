@@ -27,6 +27,7 @@ body {
 .all {
     padding-left: 3%;
     padding-right: 3%;
+    min-width: 840px;
 }
 
 .menu {
