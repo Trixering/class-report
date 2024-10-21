@@ -33,7 +33,7 @@
 
 
         async function reply(debug_ = false) {
-            let comment = easyMDE.value();
+            let comment = easyMDE.markdown(easyMDE.value());
             let name = document.getElementById('user-name').value;
             const type = "text";
             const short_code = "uw5hgw8w35p2ogi";
