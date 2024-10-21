@@ -2,7 +2,9 @@ html[lang=zh-TW] {
     font-family: "Nunito,Noto Sans", "Noto Sans TC", "M PLUS Rounded 1c", sans-serif;
     color: #fff
 }
-hr {
+
+/* 目錄底線 */
+hr [class="hd1"] {
     display: block;
     padding: 0;
     margin-inline-start: auto;
@@ -13,7 +15,7 @@ hr {
     border-width: 1px;
 }
 
-
+/* 避免曾經瀏覽頁面 */
 a {
     color: inherit;
 }
@@ -27,7 +29,7 @@ body {
 .all {
     padding-left: 3%;
     padding-right: 3%;
-    min-width: 840px;
+    min-width: 500px;
 }
 
 .menu {
@@ -78,7 +80,7 @@ footer {
     text-align: right;
 }
 
-.page-menu a{
+.page-menu a {
     text-decoration: none;
 }
 
