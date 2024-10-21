@@ -2,11 +2,12 @@
     padding: 60px 20px 20px;
 }
 
+/* 輸入區塊 */
 .reply {
     margin-bottom: 20px;
 }
 
-/* textarea*/
+/* textarea */
 .CodeMirror,
 .editor-preview {
     background-color: #383a45;
@@ -14,12 +15,18 @@
     letter-spacing: 0.2px;
 }
 
-.EasyMDEContainer{
+/* textarea */
+.EasyMDEContainer {
     margin-right: 4px;
 }
 
+/* tool-bar button */
 .editor-toolbar button.active {
     background-color: #383a45;
+}
+
+.editor-toolbar button {
+    color: #fff;
 }
 
 /*找了超級久 我真沒想到插入符是用空格顯示*/
@@ -29,16 +36,12 @@
     width: 0;
 }
 
-.editor-toolbar button {
-    color: #fff;
-}
-
-
+/* textarea 文字底色 */
 .CodeMirror .cm-spell-error:not(.cm-url):not(.cm-comment):not(.cm-tag):not(.cm-word) {
     background: None;
 }
 
-
+/* username input */
 .reply input {
     font-family: inherit;
     font-size: inherit;
@@ -57,6 +60,7 @@
     position: relative;
 }
 
+/* submit button */
 #reply {
     font-size: 1rem;
     padding: 4px 16px;
@@ -69,16 +73,18 @@
     cursor: pointer;
 }
 
+/* comment-background */
 .comment-bg {
     background-color: #333;
     border-radius: 8px;
-    padding: 16px;
+    padding: 6px 16px 16px 16px;
     margin-bottom: 16px;
     transition: transform 0.35s cubic-bezier(0.5, 1, 0.89, 1);
-    cursor: pointer;
     color: #fff;
 }
 
+
+/* username & date */
 .user-box {
     display: flex;
     justify-content: space-between;
@@ -87,7 +93,7 @@
 }
 
 .username {
-    font-size: 1.2em;
+    font-size: 1.35em;
     font-weight: 600;
 }
 
@@ -97,6 +103,7 @@
     color: #aaa;
 }
 
+/* 預設評論 (高度未達上限) */
 .cmt-default {
     background-color: #444;
     padding: 12px;
@@ -105,11 +112,26 @@
     position: relative;
 }
 
+.cmt-default p {
+    margin: 0;
+}
+
+.cmt-default p br {
+    display: inline;
+}
+
+.cmt-default br {
+    display: none;
+}
+
+/* 評論 (太高) */
 .cmt-2height {
     overflow: hidden;
     position: relative;
+    cursor: pointer;
 }
 
+/* 評論 (太高:展開後) */
 .cmt-2height::after {
     content: "";
     display: block;
@@ -127,19 +149,21 @@
     max-height: none;
 }
 
+/* 評論 (太高:收合後) */
 .cmt-2height.expanded::after {
     opacity: 0;
 }
 
+/* ... */
 .more {
     font-weight: 700;
     font-size: 1.2em;
     letter-spacing: 3px;
 }
 
-
+/* 評論 (圖片高度限制) */
 .cmt-default img,
 video {
-    height: 240px;
+    max-height: 240px;
 
 }
