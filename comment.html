@@ -49,7 +49,7 @@
             try {
                 const existingComments = await getComments();
                 const newTimestamp = Math.floor(Date.now() / 1000);
-                
+
                 comment = comment.replaceAll("autoplay|loop", "")
                 comment = comment.replaceAll("\n", "<br>");
                 const newComment = [newTimestamp, name, comment];
@@ -162,7 +162,7 @@
                 // ...
                 const more = commentBg.querySelector('.more');
 
-                if (commentContent.scrollHeight > 280) {
+                if (commentContent.scrollHeight - 250 > 100) {
                     commentContent.classList.add('cmt-2height');
 
                     //點擊開合
