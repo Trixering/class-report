@@ -1,12 +1,18 @@
-html[lang=zh-TW] {
+@import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
+html {
     font-family: "Nunito,Noto Sans", "Noto Sans TC", "M PLUS Rounded 1c", sans-serif;
-    color: #fff
+    color: #fff;
+    font-size: 22px;
 }
 
+
+
 /* 目錄底線 */
-hr [class="hd1"] {
+.hd1 {
     display: block;
     padding: 0;
+    margin-block-start: 0.3em;
+    margin-block-end: 0.05em;
     margin-inline-start: auto;
     margin-inline-end: auto;
     unicode-bidi: isolate;
@@ -24,17 +30,17 @@ a {
 body {
     background-color: #272834;
     margin: 0;
+    padding-left: 3%;
+    padding-right: 3%;
 }
 
 .all {
-    padding-left: 3%;
-    padding-right: 3%;
-    min-width: 500px;
+    min-width: 555px;
 }
 
 .menu {
     position: fixed;
-    height: 60px;
+    height: 55px;
     left: 3%;
     right: 3%;
     width: 94%;
@@ -56,7 +62,6 @@ footer {
     font-size: 18px;
 }
 
-
 .connect-menu {
     list-style: none;
     padding: 0;
@@ -69,8 +74,8 @@ footer {
 }
 
 .page-menu {
-    font-weight: 700;
-    font-size: 1.2em;
+    font-weight: 800;
+    font-size: 1rem;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -84,7 +89,136 @@ footer {
     text-decoration: none;
 }
 
+/* 隱藏的子選單樣式 */
+.sub-menu {
+    display: none;
+    /* 預設隱藏 */
+    position: absolute;
+    right: 5.5em;
+    background-color: #3C3C3C;
+    color: #fff;
+    list-style-type: none;
+    padding: 0 10px 10px 10px;
+    margin-top: 28px;
+    border-radius: 4px;
+    font-size: 1em;
+    text-align: left;
+    font-weight: 600;
+    line-height: 1.8;
+    letter-spacing: 1px;
+    min-width: 6rem;
+    border: 6px dashed #F9F900;
+}
+
+.about {
+    right: 0;
+    border: 6px dashed #FF8800;
+    white-space: nowrap;
+    /* 防止內容換行 */
+}
+
+/* 子選單中的項目樣式 */
+.sub-menu li a {
+    text-decoration: none;
+}
+
+.sub-menu li a:hover {
+    text-decoration: underline;
+}
+
+.child-menu {
+    font-size: 0.8em;
+    font-weight: 400;
+    line-height: 1.35;
+    color: #D0D0D0;
+}
 
 .content {
     padding: 60px 5px 0px;
 }
+
+.codeline {
+    display: inline-block;
+    /* 使背景寬度隨內容變化 */
+    transition: max-height 0.35s cubic-bezier(0.5, 1, 0.89, 1), opacity 0.35s cubic-bezier(0.5, 1, 0.89, 1);
+    position: relative;
+    color: #cccccc;
+    background-color: #1f1f1f;
+    border-radius: 6px;
+    font-family: "Consolas", 'Courier New', monospace;
+    font-weight: normal;
+    font-size: 0.7rem;
+    line-height: 1.1;
+    padding: 4px 6px 8px 6px;
+    margin: 0 0 0 34px;
+}
+
+.multi {
+    white-space: pre;
+}
+
+code {
+    border-radius: 6px;
+    background-color: #1F1F1F;
+    font-family: "Consolas", 'Courier New', monospace;
+    padding: 1px 2px 3px 2px;
+    font-size: 1rem;
+}
+
+code.green {
+    color: rgb(78, 201, 176);
+}
+
+code.blue {
+    color: rgb(156, 220, 254);
+}
+
+code.yellow {
+    color: rgb(220, 220, 170);
+}
+
+.code-box {
+    display: inline-block;
+    border-radius: 6px;
+    transition: transform 0.35s cubic-bezier(0.5, 1, 0.89, 1);
+    background-color: #DCB5FF;
+    margin: 6px 0 12px 34px;
+    padding: 6px 8px 0 0;
+}
+.code-box.yellow{
+    background-color: 	#FFFFB9;
+}
+
+.code-box .codeline {
+    margin: 1px 0 0 7px;
+}
+
+.code-2height {
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+
+.cmt-2height::after {
+    content: "";
+    display: block;
+    height: 60px;
+    background: linear-gradient(transparent, #444);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 1;
+    transition: opacity 0.35s;
+}
+
+.cmt-2height.expanded {
+    max-height: none;
+}
+
+/* 評論 (太高:收合後) */
+.cmt-2height.expanded::after {
+    opacity: 0;
+}
+
+/* ... */
