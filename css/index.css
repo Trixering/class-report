@@ -1,0 +1,263 @@
+p {
+    margin: 0;
+}
+
+.content {
+    padding: 75px 20px 20px;
+}
+
+/* 區塊設定 */
+.block-bg {
+    background-color: #333;
+    border-radius: 8px;
+    padding: 0px 16px 16px 16px;
+    margin-bottom: 40px;
+}
+
+/* 區塊設定 */
+.block-ctn {
+    background-color: #444;
+    padding: 12px 30px 12px 14px;
+    border-radius: 4px;
+    position: relative;
+    color: #F0F0F0;
+}
+
+/* 區塊設定 */
+.title {
+    font-size: 1.7em;
+    font-weight: 300;
+    padding: 4px 0 0 11px;
+    margin: 0 0 10px 0;
+    color: #333;
+    text-shadow: 1.61px 0 #fff,
+        -1.61px 0 #fff,
+        0 1.61px #fff,
+        0 -1.61px #fff,
+        1.61px 1.61px #fff,
+        -1.61px -1.61px #fff,
+        1.61px -1.61px #fff,
+        -1.61px 1.61px #fff;
+}
+
+/* color Green */
+.cG {
+    text-shadow: 1.61px 0 #D3FF93,
+        -1.61px 0 #D3FF93,
+        0 1.61px #D3FF93,
+        0 -1.61px #D3FF93,
+        1.61px 1.61px #D3FF93,
+        -1.61px -1.61px #D3FF93,
+        1.61px -1.61px #D3FF93,
+        -1.61px 1.61px #D3FF93;
+}
+
+.cY {
+    text-shadow: 1.61px 0 #ffff27,
+        -1.61px 0 #ffff27,
+        0 1.61px #ffff27,
+        0 -1.61px #ffff27,
+        1.61px 1.61px #ffff27,
+        -1.61px -1.61px #ffff27,
+        1.61px -1.61px #ffff27,
+        -1.61px 1.61px #ffff27;
+}
+
+/* 圖文排版 */
+.row {
+    display: flex;
+    gap: 2%;
+}
+
+.row.wrap {
+    flex-wrap: wrap;
+}
+
+.row.center {
+    justify-content: center;
+}
+
+.block-ctn .imgs {
+    flex-basis: 27%;
+    /* 讓.imgs始終佔據block-ctn的30% */
+    flex-shrink: 0;
+}
+
+.block-ctn .imgs img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+
+.block-ctn img {
+    margin-right: 12px;
+    width: 400px;
+    height: auto;
+    border-radius: 12px;
+    word-wrap: break-word;
+}
+
+.row .videos {
+    min-width: 46%;
+    flex-basis: 46%;
+    max-width: 600px;
+}
+
+.videos video {
+    width: 97%;
+    border-radius: 6px;
+    margin-left: 12px;
+}
+
+@media (max-width: 800px) {
+    .row.wrap .videos {
+        min-width: 90%;
+        flex-basis: 90%;
+    }
+}
+
+
+.block-ctn hr {
+    margin: 28px 15px 42px 15px;
+}
+
+.show-img {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 50px;
+    row-gap: 40px;
+    margin-left: 32px;
+    margin-right: 32px;
+}
+
+.img-box {
+    margin: 0;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 4px;
+}
+
+
+.img-box img {
+    margin: 0;
+    width: 100%;
+    padding-bottom: 4px;
+    transition: transform 0.3s ease;
+}
+
+
+.img-box img:hover {
+    transform: translateY(-6px);
+}
+
+
+/* 文字排版區 */
+.h1 {
+    position: relative;
+    line-height: 1.145;
+    top: -8px;
+    font-size: 1.85rem;
+    margin: 30px 0 15px 0;
+    font-weight: 700;
+}
+
+.h2 {
+    position: relative;
+    font-family: "cwTeXYen";
+    line-height: 1;
+    font-size: 1.8rem;
+    margin: 36px 0 15px 6px;
+    font-weight: 600;
+}
+
+.h3 {
+    position: relative;
+    font-family: "cwTeXYen";
+    line-height: 1.15;
+    font-size: 1.4rem;
+    margin: 36px 0 15px 6px;
+    font-weight: 600;
+}
+
+.p1 {
+    position: relative;
+    text-indent: 1em;
+    font-weight: 200;
+    margin: 0 0 8px 14px;
+}
+
+.belowcode{
+    margin-top: 20px;
+}
+
+.videoartic {
+    min-width: 46%;
+    flex-basis: 46%;
+}
+
+@media (max-width: 800px) {
+    .videoartic {
+        min-width: 90%;
+        flex-basis: 90%;
+    }
+}
+
+.explain {
+    color: #aaa;
+    font-size: 0.82rem;
+    letter-spacing: 2px;
+    margin-top: 2px;
+}
+
+.metadata {
+    text-align: center;
+    white-space: pre-line;
+    color: #fff;
+    font-family: "M PLUS Rounded 1c", "cwTeXYen";
+    word-wrap: break-word;
+    line-height: 0.85;
+}
+
+.metadata a {
+    text-decoration: none;
+}
+
+.metadata a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.videotime {
+    font-family: "M PLUS Rounded 1c";
+    margin: 0 3px;
+}
+
+
+.fst {
+    margin-top: 6px;
+}
+
+.more {
+    font-family: "M PLUS Rounded 1c";
+    font-weight: 700;
+    font-size: 1.5em;
+    line-height: 0.7;
+    letter-spacing: 3px;
+    color: #1F1F1F;
+}
+
+
+#my-name {
+    position: relative;
+    top: -12px;
+    font-size: 2.5em;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+#my-educate {
+    padding-left: 4px;
+}
