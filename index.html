@@ -9,7 +9,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>個人履歷網站</title>
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/script.js"></script>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 
 
@@ -65,38 +68,182 @@
                 </ol>
                 <ol class="page-menu">
                     <li>
-                        <a href="index.html">
-                            ≡ABOUT
-                        </a>
-                    </li>
-
-                    <li>
                         <a href="comment.html">
                             COMMENT
                         </a>
                     </li>
 
                     <li>
-                        <a href="index.html">
-                            HOME
-                        </a>
+                        <a href="javascript:void(0);" onclick="openMenu('repo-menu')">≡REPO</a>
+                        <ol id="repo-menu" class="sub-menu">
+                            <li>
+                                <a href="repo.html#dy6ot">▣ dy6ot</a>
+                                <ul class="child-menu">
+                                    <li><a href="repo.html#dy6ot-1">猜曲名遊戲</a></li>
+                                    <li><a href="repo.html#dy6ot-2">猜曲繪遊戲</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="repo.html#chart">▣ 自製音遊譜面</a>
+                                <ul class="child-menu">
+                                    <li><a href="repo.html#chart-1">演示</a></li>
+                                    <li><a href="repo.html#chart-2">Storyboard</a></li>
+                                </ul>
+                            </li>
+                        </ol>
                     </li>
 
+                    <li>
+                        <a href="javascript:void(0);" onclick="openMenu('about-menu')">≡ABOUT</a>
+                        <ol id="about-menu" class="sub-menu about">
+                            <li>
+                                <a href="index.html#about">▣ 關於我</a>
+                                <ul class="child-menu">
+                                    <li><a href="index.html#about-1">專業技能</a></li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </li>
                 </ol>
             </header>
-            <hr>
+            <hr class="hd1">
         </div>
-        <div class="content">
-            11111111111111111111
+        <div class="content" id="about">
+            <div class="block-bg">
+                <p class="title cP">關於我</p>
+                <div class="block-ctn">
+                    <div class="row">
+                        <div class="imgs" id="avatar">
+                            <img src="image/profile.png" alt="me">
+                        </div>
+                        <article>
+                            <p class="h1" id="myname">劉道元</p>
+                            <p class="h3 profile" id="myeducate">中原大學&nbsp;&nbsp;資訊管理學系</p>
+                            <p class="p1" id="myslogan"><span id="getslogan"></span></p>
+                        </article>
+                    </div>
+                    <span id="about-1"></span>
+                    <hr>
+                    <div>
+                        <p class="h1" style="margin-bottom: 25px;">專業技能</p>
+                        <div class="skill-box">
+                            <!-- 初始顯示固定的項目 -->
+                            <div class="skill">
+                                <p class="h3 skl">Python</p>
+                                <div class="progress-bar" data-value="85" style="--value: 85; --color: #28FF28;"></div>
+                            </div>
+                            <div class="skill">
+                                <p class="h3 skl">前端設計</p>
+                                <div class="progress-bar" data-value="60" style="--value: 60; --color: #F9F900;"></div>
+                            </div>
+                            <div class="skill">
+                                <p class="h3 skl">專案規劃</p>
+                                <div class="progress-bar" data-value="70" style="--value: 70; --color: #F9F900;"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
         <footer>
-
             <span id="busuanzi_container_site_pv">Page visits:&nbsp;<span id="busuanzi_value_site_pv"></span></span>
             <br>
             Built by Trixering.&nbsp;&nbsp;All rights reserved.
         </footer>
     </div>
+    <script>
+        $(".content").click(function () {
+            $("#repo-menu").hide();
+            $("#about-menu").hide();
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const fetchSlogan = async () => {
+                try {
+                    const response = await fetch("https://api.howtobullshit.me/bullshit", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            "Topic": "自我",
+                            "MinLen": 65
+                        })
+                    });
 
+                    let data = await response.text();
+                    data = data.replace(/&nbsp;/g, " ");
+                    data = data.replace(/<br>/g, " ");
+                    document.getElementById("getslogan").innerText = '『' + data + '』';
+                } catch (error) {
+                    document.getElementById("getslogan").innerText = "— Conding真的很有趣 —";
+                }
+            };
+
+            fetchSlogan();
+
+            const skillBox = document.querySelector(".skill-box");
+
+            const skillList = () => [
+                { skill: "生命值" },
+                { skill: "精神力" },
+                { skill: "攻擊力" },
+                { skill: "幸運值" },
+                { skill: "魔抗" },
+                { skill: "防禦率" },
+                { skill: "敏捷" },
+                { skill: "力量" },
+                { skill: "M P" },
+                { skill: "暴擊率" }
+            ];
+
+            // 選3個技能
+            const skills = skillList();
+            const selectedSkills = [];
+            while (selectedSkills.length < 3) {
+                const randomSkill = skills[Math.floor(Math.random() * skills.length)];
+                if (!selectedSkills.includes(randomSkill.skill)) {
+                    selectedSkills.push(randomSkill.skill);
+                }
+            }
+
+            // 設置每個技能的數值和顏色
+            selectedSkills.forEach(skill => {
+                const skillValue = Math.floor(Math.random() * 96) + 5;
+
+
+                const skillElement = document.createElement("div");
+                skillElement.classList.add("skill");
+
+                const skillName = document.createElement("p");
+                skillName.classList.add("h3", "skl");
+                skillName.textContent = skill;
+
+                const progressBar = document.createElement("div");
+                progressBar.classList.add("progress-bar");
+                progressBar.setAttribute("data-value", skillValue);
+                progressBar.style.setProperty("--value", skillValue);
+
+                // 設定顏色
+                if (skillValue <= 50) {
+                    progressBar.style.setProperty("--color", "#FF2D2D");
+                } else if (skillValue <= 80) {
+                    progressBar.style.setProperty("--color", "#F9F900");
+                } else {
+                    progressBar.style.setProperty("--color", "#28FF28");
+                }
+
+                // 加入到 skill 元素中
+                skillElement.appendChild(skillName);
+                skillElement.appendChild(progressBar);
+
+                // 加入到 skill-box 中
+                skillBox.appendChild(skillElement);
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -4,14 +4,22 @@
     href="https://fonts.googleapis.com/css2?family=Nunito&family=Noto+Sans&family=Noto+Sans+TC&family=M+PLUS+Rounded+1c&display=swap"
     rel="stylesheet">
 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>個人履歷網站</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/script.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css" />
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/comment.css">
-
+    <style>
+        @font-face {
+            font-family: 'jf-openhuninn';
+            src: url('font/jf-openhuninn-2.1.ttf') format("truetype");
+        }
+    </style>
 </head>
 
 
@@ -66,23 +74,42 @@
                 </ol>
                 <ol class="page-menu">
                     <li>
-                        <a href="index.html">
-                            ≡ABOUT
-                        </a>
-                    </li>
-
-                    <li>
                         <a href="comment.html">
                             COMMENT
                         </a>
                     </li>
 
                     <li>
-                        <a href="index.html">
-                            HOME
-                        </a>
+                        <a href="javascript:void(0);" onclick="openMenu('repo-menu')">≡REPO</a>
+                        <ol id="repo-menu" class="sub-menu">
+                            <li>
+                                <a href="repo.html#dy6ot">▣ dy6ot</a>
+                                <ul class="child-menu">
+                                    <li><a href="repo.html#dy6ot-1">猜曲名遊戲</a></li>
+                                    <li><a href="repo.html#dy6ot-2">猜曲繪遊戲</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="repo.html#chart">▣ 自製音遊譜面</a>
+                                <ul class="child-menu">
+                                    <li><a href="repo.html#chart-1">演示</a></li>
+                                    <li><a href="repo.html#chart-2">Storyboard</a></li>
+                                </ul>
+                            </li>
+                        </ol>
                     </li>
 
+                    <li>
+                        <a href="javascript:void(0);" onclick="openMenu('about-menu')">≡ABOUT</a>
+                        <ol id="about-menu" class="sub-menu about">
+                            <li>
+                                <a href="index.html#about">▣ 關於我</a>
+                                <ul class="child-menu">
+                                    <li><a href="index.html#about-1">專業技能</a></li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </li>
                 </ol>
             </header>
             <hr class="hd1">
@@ -148,6 +175,9 @@
             } else if (name.length > 40) {
                 alert("Your name lenght must less than 40.");
                 return;
+            } else if (comment.length > 600) {
+                alert("Your comment lenght must less than 600.");
+                return;
             }
 
             try {
@@ -191,14 +221,11 @@
             try {
                 let data;
 
+                console.log(debug_ == true)
+                console.log(debug_)
                 if (debug_ == true) {
 
                     const response = await fetch('comment.json');
-
-                    if (!response.ok) {
-                        throw new Error('Failed to fetch local comment.json');
-                    }
-
                     data = await response.json();
                 } else {
                     const request = new Request(proxyURL + requestURL, {
@@ -224,7 +251,7 @@
                 commentList.innerHTML = `
                 <p style="width: 500px;">
                     請先至cors-anywhere開啟設置。<br>
-                    <a href="https://cors-anywhere.herokuapp.com/" target="_blank">
+                    <a href="https://cors-anywhere.herokuapp.com/" onclick="reloadPage()" target="_blank">
                         https://cors-anywhere.herokuapp.com/
                     </a>
                 </p>
@@ -246,9 +273,9 @@
                 const date = new Date(timestamp * 1000).toISOString().split('T')[0].replace(/-/g, '/');
                 //防止惡意留言
                 if (comment.toString().match("script")) {
-                    comment = "<code>" + comment + "</code>"
+                    comment = comment.replaceAll("<script", "&lt;script&gt;")
                 }
-                
+
                 const commentHTML = `
                 <div class="comment-bg">
                     <div class="user-box">
@@ -278,7 +305,7 @@
                             commentContent.style.maxHeight = commentContent.scrollHeight + 'px';
                             more.style.opacity = '0';
                         } else {
-                            commentContent.style.maxHeight = '280px';
+                            commentContent.style.maxHeight = '20vh';
                             more.style.opacity = '1';
 
                             // 收合移動到留言開頭
@@ -290,12 +317,23 @@
                         }
                     });
 
-                    commentContent.style.maxHeight = '280px';
+                    commentContent.style.maxHeight = '20vh';
                 } else {
                     more.style.display = 'none';
                 }
             });
-        } window.onload = getComments;
+        }
+        function reloadPage() {
+            setTimeout(function () { window.location.href = "comment.html"; }, 8000);
+        }
+
+        window.onload = getComments(false);
+    </script>
+    <script>
+        $(".content").click(function () {
+            $("#repo-menu").hide();
+            $("#about-menu").hide();
+        });
     </script>
 </body>
 
